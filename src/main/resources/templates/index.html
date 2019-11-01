@@ -1,15 +1,162 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>支付界面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>支付宝立即到账支付系统</title>
 </head>
+<style type="text/css">
+    body {
+        background: #F8F9FB;
+    }
+
+    #con {
+        width: 400px;
+        height: 350px;
+        background: #fff;
+        margin: 100px auto;
+        border-radius: 20px;
+        box-shadow: 0 20px 10px #f2f2f2;
+        overflow: hidden;
+    }
+
+    #con .top {
+        width: 400px;
+        height: 60px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        background: #0AE;
+        line-height: 60px;
+        font-size: 18px;
+        text-align: center;
+        color: #fff;
+    }
+
+    #con .input-style {
+        width: 80%;
+        margin: 30px auto 0;
+    }
+
+    #con .form-control {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #eee;
+        outline: none;
+        height: 45px;
+        font-size: 16px;
+    }
+
+    #con .radio {
+        width: 80%;
+        margin: 10px auto 0;
+    }
+
+    #con .btn_con {
+        width: 90px;
+        height: 35px;
+        margin: 50px auto 10px;
+    }
+
+    #con .btn {
+        width: 90px;
+        height: 35px;
+        background: #10a6e2;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+    }
+
+    #con .btn:hover {
+        background: #00aaee;
+        cursor: pointer;
+    }
+</style>
 <body>
-    <div>
-        请输入金额:
-        <input type="text" id="cardNum">
-        <button id="buttonSubmit">确认</button>
-    </div>
+<div id="con">
+    <div class="top">支付宝立即到账支付</div>
+    <form>
+        <div class="input-style">
+            <input id="inputmoney"
+                   type="text"
+                   name="inputmoney"
+                   class="form-control"
+                   placeholder="请输入金额, 必须保留小数点后两位"
+                   required>
+        </div>
+
+        <div class="radio" style="visibility: hidden">
+            <label>
+                <p><input type="radio" name="demo1" id="demo1-alipay" value="43" checked="">
+                    支付宝支付</p>
+            </label>
+        </div>
+
+        <div class="btn_con">
+            <button type="button" id="demoBtn1" class="btn">发起支付</button>
+        </div>
+        <!--<p style="text-align: center;"><a href="http://liketube.cn/payjs/" style="text-decoration: none;color: #666;">体验微信支付</a></p>-->
+
+        <!--<p><input id="inputmoney" type="text" name="inputmoney" class="form-control" placeholder="请输入金额" required></p>-->
+
+        <!--<div class="radio">-->
+        <!--<label>-->
+        <!--<p><input type="radio" name="demo1" id="demo1-alipay" value="43" checked="">-->
+        <!--支付宝支付</p>-->
+        <!--</label>-->
+        <!--</div>-->
+        <!--<div class="radio">-->
+        <!--<label>-->
+        <!--<p><input type="radio" name="demo1" id="demo1-weixin" value="44">-->
+        <!--微信支付</p>-->
+        <!--</label>-->
+        <!--</div>-->
+        <!--<button type="button" id="demoBtn1">确认购买</button>-->
+    </form>
+
+    <form style='display:none;' id='formpay' name='formpay' method='post'
+          action='https://api.6688pay.com:8080/?input_charset=utf-8'>
+        <input name='order_no' id='order_no' type='text' value=''/>
+        <input name='subject' id='subject' type='text' value=''/>
+        <input name='pay_type' id='pay_type' type='text' value=''/>
+        <input name='money' id='money' type='text' value=''/>
+        <input name='app_id' id='app_id' type='text' value=''/>
+        <input name='extra' id='extra' type='text' value=''/>
+        <input name='sign' id='sign' type='text' value=''/>
+        <input type='submit' id='submitdemo1'>
+    </form>
+</div>
+
+<!-- Jquery files -->
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $().ready(function () {
+        function getistype() {
+            return ($("#demo1-alipay").is(':checked') ? "43" : "44");
+        }
+
+        $("#demoBtn1").click(function () {
+            $.get(
+                "http://3s.dkys.org:13840/pay/pay",
+                {
+                    money: $("#inputmoney").val(),
+                    pay_type: getistype()
+                },
+                function (response) {
+                    data = response.data;
+                    console.log(data.order_no);
+                    $("#order_no").val(data.order_no);
+                    $('#subject').val(data.subject);
+                    $("#pay_type").val(data.pay_type);
+                    $('#money').val(data.money);
+                    $('#app_id').val(data.app_id);
+                    $('#extra').val(data.extra);
+                    $('#sign').val(data.sign);
+                    $('#submitdemo1').click();
+                }, "json"
+            );
+        });
+    });
+</script>
 
 </body>
 </html>
