@@ -80,13 +80,14 @@
                    type="text"
                    name="inputmoney"
                    class="form-control"
-                   placeholder="请输入金额, 必须保留小数点后两位"
+                   placeholder="充值金额后面必须加0.01"
                    required>
         </div>
-
+        <div style="font-size: 14px; color: red; text-align:center;">金额输入示例：100=100.01，1000=1000.01，10000=10000.01</div>
+        <div style="font-size: 14px; color: red; text-align:center;">请确认生成订单与输入金额一致后再进行支付！</div>
         <div class="radio" style="visibility: hidden">
             <label>
-                <p><input type="radio" name="demo1" id="demo1-alipay" value="43" checked="">
+                <p><input type="radio" name="demo1" id="demo1-alipay" value="43" checked="checked">
                     支付宝支付</p>
             </label>
         </div>
