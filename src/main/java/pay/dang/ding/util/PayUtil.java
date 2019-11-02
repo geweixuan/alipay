@@ -16,8 +16,8 @@ public class PayUtil {
 
 	public static String BASE_URL = "http://geweixuan.top";
 
-	public static String APP_ID = "11322";	//见后台
-	public static String APP_SECRET = "4de42560aebd4e9bb57fb37cfd162e65";	//见后台
+	public static String APP_ID = "11326";	//见后台
+	public static String APP_SECRET = "daaa95d729d94f61bd82687698dc1ab3";	//见后台
 
 	public static Map<String, Object> payOrder(Map<String, Object> remoteMap) throws UnsupportedEncodingException {
 		Map<String, Object> paramMap = new HashMap<String, Object>();

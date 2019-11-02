@@ -22,7 +22,7 @@ public class PayController {
 
 	@RequestMapping("/pay")
 	@ResponseBody
-	public Map<String, Object> pay(HttpServletRequest request, float money, int pay_type) throws UnsupportedEncodingException {
+	public Map<String, Object> pay(HttpServletRequest request, String money, int pay_type) throws UnsupportedEncodingException {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Map<String, Object> remoteMap = new HashMap<String, Object>();
 		remoteMap.put("money", money);

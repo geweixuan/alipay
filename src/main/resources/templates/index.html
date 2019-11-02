@@ -80,15 +80,26 @@
                    type="text"
                    name="inputmoney"
                    class="form-control"
-                   placeholder="充值金额后面必须加0.01"
+                   placeholder="请输入支付金额，最多保留两位小数"
                    required>
         </div>
-        <div style="font-size: 14px; color: red; text-align:center;">金额输入示例：100=100.01，1000=1000.01，10000=10000.01</div>
         <div style="font-size: 14px; color: red; text-align:center;">请确认生成订单与输入金额一致后再进行支付！</div>
-        <div class="radio" style="visibility: hidden">
+        <!--<div class="radio" style="visibility: hidden">-->
+        <!--<label>-->
+        <!--<p><input type="radio" name="demo1" id="demo1-alipay" value="43" checked="checked">-->
+        <!--支付宝支付</p>-->
+        <!--</label>-->
+        <!--</div>-->
+        <div class="radio">
             <label>
                 <p><input type="radio" name="demo1" id="demo1-alipay" value="43" checked="checked">
                     支付宝支付</p>
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <p><input type="radio" name="demo1" id="demo1-weixin" value="44">
+                    微信支付</p>
             </label>
         </div>
 
@@ -136,15 +147,29 @@
         }
 
         $("#demoBtn1").click(function () {
+            var money = $("#inputmoney").val();
+            var doltIndex = money.indexOf(".");
+            var moneyLength = money.length;
+
+            if (doltIndex == -1) {
+                money = money + ".00";
+            } else if (doltIndex == (moneyLength - 1)) {
+                money = money + "00";
+            } else if (doltIndex == (moneyLength - 2)) {
+                money = money + "0";
+            } else if ((moneyLength - 3) > doltIndex) {
+                alert("输入有误，最多支持两位小数！");
+                return;
+            }
+            var getUrl = "/pay/pay";
             $.get(
-                "http://3s.dkys.org:13840/pay/pay",
+                getUrl,
                 {
-                    money: $("#inputmoney").val(),
+                    money: money,
                     pay_type: getistype()
                 },
                 function (response) {
                     data = response.data;
-                    console.log(data.order_no);
                     $("#order_no").val(data.order_no);
                     $('#subject').val(data.subject);
                     $("#pay_type").val(data.pay_type);
