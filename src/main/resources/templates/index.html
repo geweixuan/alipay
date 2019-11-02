@@ -11,7 +11,7 @@
     }
 
     #con {
-        width: 80%;
+        width: 400px;
         height: 350px;
         background: #fff;
         margin: 100px auto;
@@ -21,7 +21,7 @@
     }
 
     #con .top {
-        width: 100%;
+        width: 400px;
         height: 60px;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
@@ -84,17 +84,19 @@
                    required>
         </div>
         <div style="font-size: 14px; color: red; text-align:center;">请确认生成订单与输入金额一致后再进行支付！</div>
-        <div class="radio">
-            <label>
-                <p><input type="radio" name="demo1" id="demo1-alipay" value="43" checked="checked">
-                    支付宝支付</p>
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <p><input type="radio" name="demo1" id="demo1-weixin" value="44">
-                    微信支付</p>
-            </label>
+        <div style="visibility: hidden;">
+            <div class="radio">
+                <label>
+                    <p><input type="radio" name="demo1" id="demo1-alipay" value="43" checked="checked">
+                        支付宝支付</p>
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <p><input type="radio" name="demo1" id="demo1-weixin" value="44">
+                        微信支付</p>
+                </label>
+            </div>
         </div>
 
         <div class="btn_con">
